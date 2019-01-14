@@ -8,16 +8,18 @@ const mo = new MovingObject({
     color: "#00FF00"
 });
 
-document.addEventListener("DOMContentLoaded", event => {
-    const canvasEl = document.getElementsByTagName("canvas")[0];
-    let c = canvasEl.getContext("2d");
-    canvasEl.height = window.innerHeight;
-    canvasEl.width = window.innerWidth;
-    mo.draw(c);
-    mo.move();
-    mo.draw(c);
-    mo.move();
-    mo.draw(c);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const canvasEl = document.getElementById("canvas");
+    var WIDTH = window.innerWidth;
+    var HEIGHT = window.innerHeight;
+    canvasEl.height = HEIGHT;
+    canvasEl.width = WIDTH;
+    const ctx = canvasEl.getContext('2d');
+    console.log(map);
+  
+    drawWorld();
 })
 
 
