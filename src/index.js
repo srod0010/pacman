@@ -1,31 +1,80 @@
-const MovingObject = require('./moving_object.js');
-// window.MovingObject = MovingObject;
-
-const mo = new MovingObject({
-    pos: [30, 30],
-    vel: [10, 10],
-    radius: 5,
-    color: "#00FF00"
-});
+const Game = require('./game');
+const Pacman = require('./pacman');
+const map = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
+    [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 3, 1],
+    [1, 3, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 3, 1],
+    [1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
+    [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+    [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+    [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+    [1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
+    [1, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 1],
+    [1, 1, 3, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 3, 1, 1],
+    [1, 3, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 3, 1],
+    [1, 3, 1, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 1, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+];
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
     const canvasEl = document.getElementById("canvas");
-    var WIDTH = window.innerWidth;
-    var HEIGHT = window.innerHeight;
+    var WIDTH = 570; // 19 cols * 30
+    var HEIGHT = 660; // 22 rows * 30
     canvasEl.height = HEIGHT;
     canvasEl.width = WIDTH;
     const ctx = canvasEl.getContext('2d');
-    console.log(map);
-  
-    drawWorld();
+    
+
+    const game = new Game(canvasEl,ctx, map);
+
+    document.onkeydown = function (e) {
+        //ascii values => a = 65
+        if (e.which == 37) {
+            //left
+            game.pacman.direction = 'left';
+            game.pacman.xdir -= 30;
+            console.log('left');
+            console.log(game.pacman.x);
+        } else if (e.which == 38) {
+            //up
+ 
+            game.pacman.direction = 'up';
+            game.pacman.ydir -= 30;
+            console.log('up');
+        } else if (e.which == 39) {
+            // right
+            game.pacman.direction = 'right';
+            game.pacman.xdir += 30;
+            console.log('right');
+
+        } else if (e.which == 40) {
+            // down
+            game.pacman.direction = 'down';
+            game.pacman.ydir += 30;
+            console.log('down');
+        }
+    }
+    game.setup();
+    document.getElementById("start").addEventListener("click", () => game.play());
+    
+    
 })
 
 
 
 
 
-console.log('webpack is working');
+// console.log('webpack is working');
  
 
