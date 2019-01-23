@@ -9,6 +9,17 @@
      flex-direction: column;
  }
 
+.title{
+    width: 900px;
+    height: 200px;
+    /* border: 1px solid yellow; */
+    margin: auto auto;
+    /* background-image: url('https://www.logolynx.com/images/logolynx/96/967ea5e4598462a301b53eb8b10ecfad.png'); */
+    background-image: url('https://www.logolynx.com/images/logolynx/81/812485da0e4d9405b6e113bf6db8a235.png');
+    background-position: center;
+    background-size: cover;
+}
+
 .main {
     /* width: 50%;
     height: 80%; */
@@ -22,10 +33,10 @@
 #start {
     border-radius: 10px;
     height: 60px;
-    /* width: 100%; */
+    width: 100%;
     margin: 25px 0;
     font-family: cursive;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 900;
 }
 
