@@ -229,6 +229,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
+        
     // this.map = [
     //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     //     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -254,6 +255,8 @@ class Pacman {
     //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     // ];
     }
+
+   
 
 
     arc() {
@@ -316,15 +319,24 @@ class Pacman {
 
     solidDetect(dx, dy, x, y) {
         if (x >= dx && x <= dx + 30 && y >= dy && y <= dy + 30) {
+            // console.log(true);
+            console.log(this.pillCount);
             return true;
         } else {
+            // console.log(false);
             return false;
         }
     }
 
     collision(xAxis, yAxis, nextX, nextY) {
         if (this.map[yAxis][xAxis] === 1 && this.solidDetect(xAxis * 30, yAxis * 30, nextX, nextY)) {
+            //check walls
+            console.log('wall collission');
             return true;
+        } else if (this.map[yAxis][xAxis] === 3 && this.solidDetect(xAxis * 30, yAxis * 30, nextX, nextY)) {
+            //check pills
+            console.log("pill collision");
+            this.map[yAxis][xAxis] = 0;
         } else {
             return false;
         }
@@ -343,6 +355,7 @@ class Pacman {
         this.move();
         this.ctx.beginPath();
         this.arc();
+
         //mouth
         this.ctx.lineTo(this.x, this.y);
 
