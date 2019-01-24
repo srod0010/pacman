@@ -257,9 +257,28 @@ class Pacman {
 
 
     arc() {
-        this.ctx.arc(this.x, this.y, 11.5,
-            (Math.PI / 180) * 30,
-            (Math.PI / 180) * (360 - 30));
+        let sAngle;
+        let eAngle;
+        
+        if (this.direction === 'left') {
+            sAngle = 1.25 * Math.PI;
+            eAngle = 0.75 * Math.PI;
+            
+        } else if (this.direction === 'right' || this.direction === false) {
+            sAngle = (Math.PI / 180) * 30;
+            eAngle = (Math.PI / 180) * (360 - 30);
+        } else if (this.direction === 'down') {
+            sAngle = 0.75 * Math.PI;
+            eAngle = 0.25 * Math.PI;
+        } else if (this.direction === 'up') {
+            sAngle = (7 / 4) * Math.PI;
+            eAngle = 1.25 * Math.PI;
+        }
+        // this.ctx.arc(this.x, this.y, 12.5,
+        //     (Math.PI / 180) * 30,
+        //     (Math.PI / 180) * (360 - 30));
+        this.ctx.arc(this.x, this.y, 12.5, sAngle, eAngle);
+        
     }
 
     checkCollision(direction) {
@@ -324,7 +343,10 @@ class Pacman {
         this.move();
         this.ctx.beginPath();
         this.arc();
+        //mouth
         this.ctx.lineTo(this.x, this.y);
+
+        //fill pacman shape with fillstyle
         this.ctx.fillStyle = 'yellow';
         this.ctx.fill();
         this.ctx.stroke();
