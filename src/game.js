@@ -6,21 +6,39 @@ class Game {
         this.canvas = canvas;
         this.ctx = ctx;
         this.map = map;
-        this.walls = new Walls(ctx, map);
-        this.pacman = new Pacman(ctx, map);
+        this.walls = new Walls(ctx, this.map);
+        this.pacman = new Pacman(ctx, this.map);
+        this.winner = false;
         
     }
 
-    setup() {
-        this.walls.render();
-        this.pacman.draw();
+    gameOver() {
+        if (this.pacman.pillCount === 0) {
+            // console.log('ate all the pills');
+            this.winner = true;
+            return true;
+        } else {
+            console.log(`${this.pacman.pillCount} pills remaining`)
+        }
+    }
+
+    display() {
+        if (this.gameOver()) {
+            this.walls.clearWalls();
+            this.walls.endGame();
+        } else {
+            this.walls.render();
+            this.pacman.draw();
+        }
     }
 
     play() {
        const animate = () => {
            this.frame = requestAnimationFrame(animate);
-           this.setup();
+           this.display();
+           
        }
+
        animate();
     }
 }

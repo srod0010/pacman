@@ -39,7 +39,7 @@ class Walls {
 
   clearWalls() {
     this.ctx.beginPath();
-    this.ctx.clearRect(0, 0, 600, 600);
+    this.ctx.clearRect(0, 0, 660, 660);
     this.ctx.stroke();
   }
 
@@ -65,11 +65,19 @@ class Walls {
     });
   }
 
+  endGame() {
+    this.createWalls();
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = "39px Georgia";
+    this.ctx.fillText("Congratulations you won!", 80, 330); //text, pos
+    // this.ctx.strokeText("Pacman loading....", 50, 100); //hollow text
+  }
+
   render() {
       this.clearWalls();
       this.createBackground();
       this.createWalls();
-      console.log(this.map.length, this.map[0].length);
+      // console.log(this.map.length, this.map[0].length);
   }
 
 }
