@@ -1,6 +1,7 @@
 const Game = require('./game');
 const Pacman = require('./pacman');
-// 147
+
+// pillcount = 147
 const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
@@ -26,6 +27,7 @@ const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
+//pillcount = 8
 const testMap = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -62,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvasEl.getContext('2d');
     
 
-    const game = new Game(canvasEl,ctx, map);
+    const game = new Game(canvasEl,ctx, testMap);
 
     document.onkeydown = function (e) {
         //ascii values => a = 65

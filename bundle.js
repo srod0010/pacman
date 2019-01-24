@@ -119,8 +119,8 @@ class Game {
 
     display() {
         if (this.gameOver()) {
-            this.walls.clearWalls();
-            this.walls.endGame();
+           let doc = document.getElementById('gameover');
+           doc.style.display = 'block';
         } else {
             this.walls.render();
             this.pacman.draw();
@@ -151,7 +151,8 @@ module.exports = Game;
 
 const Game = __webpack_require__(/*! ./game */ "./src/game.js");
 const Pacman = __webpack_require__(/*! ./pacman */ "./src/pacman.js");
-// 147
+
+// pillcount = 147
 const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
@@ -177,6 +178,7 @@ const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
+//pillcount = 8
 const testMap = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -213,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvasEl.getContext('2d');
     
 
-    const game = new Game(canvasEl,ctx, map);
+    const game = new Game(canvasEl,ctx, testMap);
 
     document.onkeydown = function (e) {
         //ascii values => a = 65
@@ -273,7 +275,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
-        this.pillCount = 147;
+        this.pillCount = 8;
         this.open = false;
         setInterval(() => {
             if (this.open) {

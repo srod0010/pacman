@@ -24,8 +24,8 @@ class Game {
 
     display() {
         if (this.gameOver()) {
-            this.walls.clearWalls();
-            this.walls.endGame();
+           let doc = document.getElementById('gameover');
+           doc.style.display = 'block';
         } else {
             this.walls.render();
             this.pacman.draw();

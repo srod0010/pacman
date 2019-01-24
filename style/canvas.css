@@ -4,7 +4,7 @@
      /* background-image: url('https://images.unsplash.com/photo-1530482817083-29ae4b92ff15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3302&q=80'); */
      background-image: url('https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2848&q=80');
      background-position: center;
-     border: 1px solid red;
+     /* border: 1px solid red; */
      display: flex;
      flex-direction: column;
  }
@@ -48,3 +48,23 @@
      background-color: black;
  }
 
+
+#gameover {
+    width: 575px;
+    height: 665px;
+    /* border: 1px solid green; */
+    position: absolute;
+    display: none;
+    /* background-color: red; */
+    /* opacity: 0.1; */
+    background-image: url('https://cdn.dribbble.com/users/368620/screenshots/2097058/pacman.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.winner-text {
+    text-align: center;
+    color: white;
+    font-family: fantasy;
+}
