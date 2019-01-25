@@ -9,6 +9,7 @@ class Game {
         this.walls = new Walls(ctx, this.map);
         this.pacman = new Pacman(ctx, this.map);
         this.winner = false;
+        this.started = false;
         
     }
 
@@ -23,13 +24,28 @@ class Game {
     }
 
     display() {
-        if (this.gameOver()) {
-           let doc = document.getElementById('gameover');
-           doc.style.display = 'block';
+        let pregame = document.getElementById('pregame');
+        let endGame = document.getElementById('gameover');
+        if (this.started === false) {
+            pregame.style.display = 'block';
         } else {
-            this.walls.render();
-            this.pacman.draw();
+            pregame.style.display = 'none';
+             if (this.gameOver()) {
+                 endGame.style.display = 'block';
+             } else {
+                 console.log(this.started);
+                 this.walls.render();
+                 this.pacman.draw();
+             }
         }
+        // if (this.gameOver()) {
+        //    let endGame = document.getElementById('gameover');
+        //    endGame.style.display = 'block';
+        // } else {
+        //     console.log(this.started);
+        //     this.walls.render();
+        //     this.pacman.draw();
+        // }
     }
 
     play() {

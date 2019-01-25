@@ -49,7 +49,7 @@
  }
 
 
-#gameover {
+#pregame {
     width: 575px;
     height: 665px;
     /* border: 1px solid green; */
@@ -62,6 +62,23 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+#gameover {
+    width: 575px;
+    height: 665px;
+    /* border: 1px solid green; */
+    position: absolute;
+    display: none;
+    /* background-color: red; */
+    /* opacity: 0.1; */
+    /* background-image: url('https://cdn.dribbble.com/users/368620/screenshots/2097058/pacman.gif'); */
+    background-image: url('https://art-u3.infcdn.net/articles_uploads/2/2044/pac-man-game-over.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 
 .winner-text {
     text-align: center;

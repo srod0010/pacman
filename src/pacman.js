@@ -5,7 +5,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
-        this.pillCount = 8;
+        this.pillCount = 147;
         this.open = false;
         setInterval(() => {
             if (this.open) {
