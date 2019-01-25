@@ -1,5 +1,6 @@
 const Walls = require('./walls');
 const Pacman = require('./pacman');
+const Ghost = require('./ghost');
 
 class Game {
     constructor(canvas, ctx, map) {
@@ -8,6 +9,7 @@ class Game {
         this.map = map;
         this.walls = new Walls(ctx, this.map);
         this.pacman = new Pacman(ctx, this.map);
+        this.ghost = new Ghost(ctx, this.map);
         this.winner = false;
         this.started = false;
         
@@ -36,16 +38,10 @@ class Game {
                  console.log(this.started);
                  this.walls.render();
                  this.pacman.draw();
+                 this.ghost.draw();
              }
         }
-        // if (this.gameOver()) {
-        //    let endGame = document.getElementById('gameover');
-        //    endGame.style.display = 'block';
-        // } else {
-        //     console.log(this.started);
-        //     this.walls.render();
-        //     this.pacman.draw();
-        // }
+      
     }
 
     play() {

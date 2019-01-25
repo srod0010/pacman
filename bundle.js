@@ -95,6 +95,7 @@
 
 const Walls = __webpack_require__(/*! ./walls */ "./src/walls.js");
 const Pacman = __webpack_require__(/*! ./pacman */ "./src/pacman.js");
+const Ghost = __webpack_require__(/*! ./ghost */ "./src/ghost.js");
 
 class Game {
     constructor(canvas, ctx, map) {
@@ -103,6 +104,7 @@ class Game {
         this.map = map;
         this.walls = new Walls(ctx, this.map);
         this.pacman = new Pacman(ctx, this.map);
+        this.ghost = new Ghost(ctx, this.map);
         this.winner = false;
         this.started = false;
         
@@ -131,16 +133,10 @@ class Game {
                  console.log(this.started);
                  this.walls.render();
                  this.pacman.draw();
+                 this.ghost.draw();
              }
         }
-        // if (this.gameOver()) {
-        //    let endGame = document.getElementById('gameover');
-        //    endGame.style.display = 'block';
-        // } else {
-        //     console.log(this.started);
-        //     this.walls.render();
-        //     this.pacman.draw();
-        // }
+      
     }
 
     play() {
@@ -155,6 +151,47 @@ class Game {
 }
 
 module.exports = Game;
+
+/***/ }),
+
+/***/ "./src/ghost.js":
+/*!**********************!*\
+  !*** ./src/ghost.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+class Ghost {
+    constructor (ctx, map) {
+        this.ctx = ctx;
+        this.map = map;
+        this.x = 285;
+        this.y = 300;
+    }
+
+    arc() {
+        this.ctx.arc(this.x, this.y, 12.5, 0, 2 * Math.PI);
+        this.ctx.fillStyle = 'purple';
+        this.ctx.fill();
+        this.ctx.stroke();
+        
+    }
+
+    draw() {
+        this.ctx.beginPath();
+        this.arc();
+    }
+
+    escapeSide() {
+        if (this.x <= 0) {
+            this.x = 570 - this.x;
+        } else if (this.x >= 570) {
+            this.x = this.x - 570;
+        }
+    }
+}
+
+module.exports = Ghost;
 
 /***/ }),
 
@@ -231,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvasEl.getContext('2d');
     
 
-    const game = new Game(canvasEl,ctx, map);
+    const game = new Game(canvasEl,ctx, testMap);
 
     document.onkeydown = function (e) {
         //ascii values => a = 65
@@ -294,7 +331,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
-        this.pillCount = 147;
+        this.pillCount = 8;
         this.open = false;
         setInterval(() => {
             if (this.open) {
@@ -482,13 +519,13 @@ class Pacman {
         if (this.checkCollision(this.direction)) {
             return this.direction;
         } else if (this.direction === "up") {
-            this.y -= 1;
+            this.y -= 1.5;
         } else if (this.direction === "down") {
-            this.y += 1;
+            this.y += 1.5;
         } else if (this.direction === "left") {
-            this.x -= 1;
+            this.x -= 1.5;
         } else if (this.direction === "right") {
-            this.x += 1;
+            this.x += 1.5;
         }
     }
 }
