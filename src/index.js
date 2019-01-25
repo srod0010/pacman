@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvasEl.getContext('2d');
     
 
-    const game = new Game(canvasEl,ctx, map);
+    const game = new Game(canvasEl,ctx, testMap);
 
     document.onkeydown = function (e) {
         //ascii values => a = 65

@@ -5,7 +5,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
-        this.pillCount = 147;
+        this.pillCount = 8;
         this.open = false;
         setInterval(() => {
             if (this.open) {
@@ -193,13 +193,13 @@ class Pacman {
         if (this.checkCollision(this.direction)) {
             return this.direction;
         } else if (this.direction === "up") {
-            this.y -= 1;
+            this.y -= 1.5;
         } else if (this.direction === "down") {
-            this.y += 1;
+            this.y += 1.5;
         } else if (this.direction === "left") {
-            this.x -= 1;
+            this.x -= 1.5;
         } else if (this.direction === "right") {
-            this.x += 1;
+            this.x += 1.5;
         }
     }
 }
