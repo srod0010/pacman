@@ -96,6 +96,9 @@
 const Walls = __webpack_require__(/*! ./walls */ "./src/walls.js");
 const Pacman = __webpack_require__(/*! ./pacman */ "./src/pacman.js");
 const Ghost = __webpack_require__(/*! ./ghost */ "./src/ghost.js");
+// this.x = 285;
+
+// this.y = 300;
 
 class Game {
     constructor(canvas, ctx, map) {
@@ -104,7 +107,10 @@ class Game {
         this.map = map;
         this.walls = new Walls(ctx, this.map);
         this.pacman = new Pacman(ctx, this.map);
-        this.ghost = new Ghost(ctx, this.map);
+        this.shadowGhost = new Ghost(ctx, this.map, 285,300,'purple');
+        this.speedyGhost = new Ghost(ctx, this.map, 285, 290, 'pink');
+        this.bashfulGhost = new Ghost(ctx, this.map, 280,310,'cyan');
+        this.pokeyGhost = new Ghost(ctx, this.map, 284,320,'orange');
         this.winner = false;
         this.started = false;
         
@@ -133,7 +139,10 @@ class Game {
                  console.log(this.started);
                  this.walls.render();
                  this.pacman.draw();
-                 this.ghost.draw();
+                 this.shadowGhost.draw();
+                 this.speedyGhost.draw();
+                 this.pokeyGhost.draw();
+                 this.bashfulGhost.draw();
              }
         }
       
@@ -164,31 +173,42 @@ module.exports = Game;
 
 
 class Ghost {
-    constructor (ctx, map) {
+    constructor(ctx, map,x,y,color) {
         this.ctx = ctx;
         this.map = map;
-        this.x = 285;
-        this.y = 300;
-        this.xdir = this.x;
-        this.ydir = this.y;
-        this.direction = 'up';
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.direction = "none";
+        this.prevDirection = "none";
     }
 
     arc() {
-        this.ctx.arc(this.x, this.y, 12.5, 0, 2 * Math.PI);
-        this.ctx.fillStyle = 'purple';
-        this.ctx.fill();
-        this.ctx.stroke();
-        
+       this.ctx.arc(this.x, this.y, 12.5, 0, 2 * Math.PI);
+       this.ctx.fillStyle = this.color;
+       this.ctx.fill();
+       this.ctx.stroke();
     }
 
     draw() {
+        this.changeSides();
         this.move();
         this.ctx.beginPath();
         this.arc();
     }
 
-    escapeSide() {
+    randomDirection() {
+        const directions = ['left', 'right', 'up','down'];
+        this.direction = directions[Math.floor(Math.random() * 4)];
+
+        if (this.direction === this.prevDirection) {
+            this.randomDirection();
+        } else {
+            this.move();
+        }
+    }
+
+    changeSides() {
         if (this.x <= 0) {
             this.x = 570 - this.x;
         } else if (this.x >= 570) {
@@ -196,51 +216,74 @@ class Ghost {
         }
     }
 
-    // nextDirection() {
-    //     let directions = ['up', 'down','left','right'];
-    //     let idx = Math.floor(Math.random() * directions.length);
-    //     let next = directions[idx];
+    checkCollision(direction) {
+        let xRow = Math.floor(this.x / 30); // coordinates
+        let yRow = Math.floor(this.y / 30);
+        let newX = this.x,
+            newY = this.y;
 
-    // }
-
-    
-
-    collisionDetect(direction) {
-            let nextY = Math.floor(((this.ydir - 14 ) / 30));
-            let nextX = Math.floor((this.xdir / 30));
-        if (this.direction === "up" && this.map[nextY][nextX] === 0) {
-            
-            this.y -= 1;
-            this.ydir -=1; //up 
-               
-            console.log("moved up");
-            return true;
-        } else {
-            console.log(`${this.ydir/30}, ${this.xdir/30}`);
-            return false;
+        if (direction === "up") {
+            newY -= 14;
+            const top = this.collision(xRow, yRow - 1, newX, newY);
+            const left = this.collision(xRow - 1, yRow - 1, newX - 10, newY);
+            const right = this.collision(xRow + 1, yRow - 1, newX + 10, newY);
+            return top || left || right;
+        } else if (direction === "down") {
+            newY += 14;
+            const down = this.collision(xRow, yRow + 1, newX, newY);
+            const left = this.collision(xRow - 1, yRow + 1, newX - 10, newY);
+            const right = this.collision(xRow + 1, yRow + 1, newX + 10, newY);
+            return down || left || right;
+        } else if (direction === "left") {
+            newX -= 14;
+            const left = this.collision(xRow - 1, yRow, newX, newY);
+            const top = this.collision(xRow - 1, yRow - 1, newX, newY - 10);
+            const down = this.collision(xRow - 1, yRow + 1, newX, newY + 10);
+            return left || top || down;
+        } else if (direction === "right") {
+            newX += 14;
+            const right = this.collision(xRow + 1, yRow, newX, newY);
+            const top = this.collision(xRow + 1, yRow - 1, newX, newY - 10);
+            const down = this.collision(xRow + 1, yRow + 1, newX, newY + 10);
+            return right || top || down;
         }
     }
 
 
+    inBlock(dx, dy, x, y) {
+        if (x >= dx && x <= dx + 30 && y >= dy && y <= dy + 30) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-  
+    collision(xRow, yRow, newX, newY) {
+        if (this.map[yRow][xRow] === 1 && this.inBlock(xRow * 30, yRow * 30, newX, newY)) {
+            return true;
+        } else if (this.map[yRow][xRow] === 4 && this.inBlock(xRow * 30, yRow * 30, newX, newY)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     move() {
-        // const DIRECTIONS = ['left', 'right', 'up', 'down'];
-        // let randIdx = Math.floor(Math.random() * (DIRECTIONS.length+1))
-        // this.direction = DIRECTIONS[randIdx];
-        // console.log(randIdx);
-        // if (this.direction === 'up') {
-        //     this.y -= 1.2;
-        // } else if (this.direction === 'right') {
-        //     this.x += 1.2;
-        // } else if (this.direction === 'left') {
-        //     this.x -= 1.2;
-        // } else if (this.direction === 'down') {
-        //     this.y += 1.2;
-        // }
-        this.collisionDetect(this.direction);
-        this.nextDirection();
+        if (this.direction === "none" || this.checkCollision(this.direction)) {
+            this.randomDirection();
+        } else if (this.direction === "up") {
+            // this.prevDirection = "down";
+            this.y -= .8;
+        } else if (this.direction === "down") {
+            // this.prevDirection = "up";
+            this.y += .8;
+        } else if (this.direction === "right") {
+            // this.prevDirection = "left";
+            this.x += .8;
+        } else if (this.direction === "left") {
+            // this.prevDirection = "right";
+            this.x -= .8;
+        }
     }
 }
 
@@ -270,7 +313,7 @@ const map = [
     [1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
     [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 4, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
     [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1],
@@ -285,6 +328,8 @@ const map = [
 ];
 
 //pillcount = 8
+//1 wall 
+//0 free
 const testMap = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -296,7 +341,7 @@ const testMap = [
     [1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
     [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 4, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
     [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
@@ -321,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvasEl.getContext('2d');
     
 
-    const game = new Game(canvasEl,ctx, testMap);
+    const game = new Game(canvasEl,ctx, map);
 
     document.onkeydown = function (e) {
         //ascii values => a = 65
@@ -384,7 +429,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
-        this.pillCount = 8;
+        this.pillCount = 147;
         this.open = false;
         setInterval(() => {
             if (this.open) {
@@ -494,7 +539,7 @@ class Pacman {
             const top = this.collision(xAxis, yAxis - 1, nextX, nextY);
             const left = this.collision(xAxis - 1, yAxis - 1, nextX - 11.5, nextY);
             const right = this.collision(xAxis + 1, yAxis - 1, nextX + 11.5, nextY);
-            return top || left || right;
+            return top || left || right; //check collision in each direction
         } else if (direction === "down") {
             nextY += 12;
             const down = this.collision(xAxis, yAxis + 1, nextX, nextY);

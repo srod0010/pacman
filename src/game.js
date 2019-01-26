@@ -1,6 +1,9 @@
 const Walls = require('./walls');
 const Pacman = require('./pacman');
 const Ghost = require('./ghost');
+// this.x = 285;
+
+// this.y = 300;
 
 class Game {
     constructor(canvas, ctx, map) {
@@ -9,7 +12,10 @@ class Game {
         this.map = map;
         this.walls = new Walls(ctx, this.map);
         this.pacman = new Pacman(ctx, this.map);
-        this.ghost = new Ghost(ctx, this.map);
+        this.shadowGhost = new Ghost(ctx, this.map, 285,300,'purple');
+        this.speedyGhost = new Ghost(ctx, this.map, 285, 290, 'pink');
+        this.bashfulGhost = new Ghost(ctx, this.map, 280,310,'cyan');
+        this.pokeyGhost = new Ghost(ctx, this.map, 284,320,'orange');
         this.winner = false;
         this.started = false;
         
@@ -38,7 +44,10 @@ class Game {
                  console.log(this.started);
                  this.walls.render();
                  this.pacman.draw();
-                 this.ghost.draw();
+                 this.shadowGhost.draw();
+                 this.speedyGhost.draw();
+                 this.pokeyGhost.draw();
+                 this.bashfulGhost.draw();
              }
         }
       

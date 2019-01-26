@@ -5,7 +5,7 @@ class Pacman {
         this.y = 375;
         this.direction = false;
         this.map = map;
-        this.pillCount = 8;
+        this.pillCount = 147;
         this.open = false;
         setInterval(() => {
             if (this.open) {
@@ -115,7 +115,7 @@ class Pacman {
             const top = this.collision(xAxis, yAxis - 1, nextX, nextY);
             const left = this.collision(xAxis - 1, yAxis - 1, nextX - 11.5, nextY);
             const right = this.collision(xAxis + 1, yAxis - 1, nextX + 11.5, nextY);
-            return top || left || right;
+            return top || left || right; //check collision in each direction
         } else if (direction === "down") {
             nextY += 12;
             const down = this.collision(xAxis, yAxis + 1, nextX, nextY);
