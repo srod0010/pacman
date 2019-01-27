@@ -72,26 +72,35 @@ document.addEventListener("DOMContentLoaded", () => {
         //ascii values => a = 65
         if (e.which == 37) {
             //left
-            game.pacman.direction = 'left';
-            game.pacman.xdir -= 30;
+            if (!game.pacman.checkCollision('left')) {
+                game.pacman.direction = 'left';
+                game.pacman.xdir -= 30;
+            } 
             console.log('left');
             console.log(game.pacman.x);
         } else if (e.which == 38) {
             //up
- 
-            game.pacman.direction = 'up';
-            game.pacman.ydir -= 30;
+            if (!game.pacman.checkCollision('up')) {
+                game.pacman.direction = 'up';
+                game.pacman.ydir -= 30;
+
+            }
             console.log('up');
         } else if (e.which == 39) {
             // right
-            game.pacman.direction = 'right';
-            game.pacman.xdir += 30;
+            if(!game.pacman.checkCollision('right')) {
+                game.pacman.direction = 'right';
+                game.pacman.xdir += 30;
+
+            }
             console.log('right');
 
         } else if (e.which == 40) {
             // down
-            game.pacman.direction = 'down';
-            game.pacman.ydir += 30;
+            if(!game.pacman.checkCollision('down')) {
+                game.pacman.direction = 'down';
+                game.pacman.ydir += 30;
+            }
             console.log('down');
         }
     }

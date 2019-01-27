@@ -95,11 +95,11 @@ class Pacman {
         if (this.open) {
             // setInterval(() => this.open = false, 2000);
             
-            this.ctx.arc(this.x, this.y, 12.5, sAngle, eAngle);
+            this.ctx.arc(this.x, this.y, 15, sAngle, eAngle);
         } else {
             // this.open = true;
             
-            this.ctx.arc(this.x, this.y, 12.5, sAngle, eAngle);
+            this.ctx.arc(this.x, this.y, 15, sAngle, eAngle);
         }
         
     }
@@ -111,25 +111,25 @@ class Pacman {
         let nextY = this.y;
 
         if (direction === "up") {
-            nextY -= 12;
+            nextY -= 15;
             const top = this.collision(xAxis, yAxis - 1, nextX, nextY);
             const left = this.collision(xAxis - 1, yAxis - 1, nextX - 11.5, nextY);
             const right = this.collision(xAxis + 1, yAxis - 1, nextX + 11.5, nextY);
             return top || left || right; //check collision in each direction
         } else if (direction === "down") {
-            nextY += 12;
+            nextY += 15;
             const down = this.collision(xAxis, yAxis + 1, nextX, nextY);
             const left = this.collision(xAxis - 1, yAxis + 1, nextX - 11.5, nextY);
             const right = this.collision(xAxis + 1, yAxis + 1, nextX + 11.5, nextY);
             return down || left || right;
         } else if (direction === "left") {
-            nextX -= 12;
+            nextX -= 15;
             const left = this.collision(xAxis - 1, yAxis, nextX, nextY);
             const top = this.collision(xAxis - 1, yAxis - 1, nextX, nextY - 11.5);
             const down = this.collision(xAxis - 1, yAxis + 1, nextX, nextY + 11.5);
             return left || top || down;
         } else if (direction === "right") {
-            nextX += 12;
+            nextX += 15;
             const right = this.collision(xAxis + 1, yAxis, nextX, nextY);
             const top = this.collision(xAxis + 1, yAxis - 1, nextX, nextY - 11.5);
             const down = this.collision(xAxis + 1, yAxis + 1, nextX, nextY + 11.5);
