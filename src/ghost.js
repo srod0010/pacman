@@ -19,16 +19,20 @@ class Ghost {
 
     arc() {
        this.ctx.arc(this.x, this.y, 12.5, 0, 2 * Math.PI);
-       this.ctx.fillStyle = this.color;
-       this.ctx.fill();
-       this.ctx.stroke();
+    //    this.ctx.fillStyle = this.color;
+    //    this.ctx.fill();
+    //    this.ctx.stroke();
     }
 
     draw() {
         this.changeSides();
         this.move();
-        this.ctx.beginPath();
-        this.arc();
+
+        const ghostImg = new Image();
+        ghostImg.src = `./images/${this.color}.png`;
+        this.ctx.drawImage(ghostImg, 0, 0, 512, 512, this.x- 15, this.y- 15, 30, 30);
+        // this.ctx.beginPath();
+        // this.arc();
     }
 
     randomDirection() {
@@ -57,25 +61,25 @@ class Ghost {
             newY = this.y;
 
         if (direction === "up") {
-            newY -= 15;
+            newY -= 13;
             const top = this.collision(xRow, yRow - 1, newX, newY);
             const left = this.collision(xRow - 1, yRow - 1, newX - 10, newY);
             const right = this.collision(xRow + 1, yRow - 1, newX + 10, newY);
             return top || left || right;
         } else if (direction === "down") {
-            newY += 15;
+            newY += 13;
             const down = this.collision(xRow, yRow + 1, newX, newY);
             const left = this.collision(xRow - 1, yRow + 1, newX - 10, newY);
             const right = this.collision(xRow + 1, yRow + 1, newX + 10, newY);
             return down || left || right;
         } else if (direction === "left") {
-            newX -= 15;
+            newX -= 13;
             const left = this.collision(xRow - 1, yRow, newX, newY);
             const top = this.collision(xRow - 1, yRow - 1, newX, newY - 10);
             const down = this.collision(xRow - 1, yRow + 1, newX, newY + 10);
             return left || top || down;
         } else if (direction === "right") {
-            newX += 15;
+            newX += 13;
             const right = this.collision(xRow + 1, yRow, newX, newY);
             const top = this.collision(xRow + 1, yRow - 1, newX, newY - 10);
             const down = this.collision(xRow + 1, yRow + 1, newX, newY + 10);
