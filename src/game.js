@@ -35,10 +35,19 @@ class Game {
     captured() {
         let caught = false;
          this.ghosts.forEach((ghost) => {
-             if (this.pacman.x <= ghost.x + 20 &&
-                 this.pacman.x >= ghost.x - 20 && this.pacman.y <= ghost.y + 20 &&
-                 this.pacman.y >= ghost.y - 20) {
-                 caught = true;
+             if (ghost.color !== 'blue') {
+                 if (this.pacman.x <= ghost.x + 20 &&
+                     this.pacman.x >= ghost.x - 20 && this.pacman.y <= ghost.y + 20 &&
+                     this.pacman.y >= ghost.y - 20) {
+                     caught = true;
+                 }
+             } else {
+                 if (this.pacman.x <= ghost.x + 20 &&
+                     this.pacman.x >= ghost.x - 20 && this.pacman.y <= ghost.y + 20 &&
+                     this.pacman.y >= ghost.y - 20) {
+                     ghost.x = 285;
+                     ghost.y = 300;
+                 }
              }
          });
          return caught;
@@ -72,7 +81,13 @@ class Game {
                 //  this.speedyGhost.draw();
                 //  this.pokeyGhost.draw();
                 //  this.bashfulGhost.draw();
-                this.ghosts.forEach(ghost => ghost.draw());
+                this.ghosts.forEach(ghost => {
+                    if (this.pacman.power) {
+                        ghost.color = 'blue';
+                    }
+                    ghost.draw()
+                });
+
              }
         }
       
