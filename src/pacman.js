@@ -7,6 +7,7 @@ class Pacman {
         this.map = map;
         this.pillCount = 147;
         this.open = false;
+        this.power = false;
         setInterval(() => {
             if (this.open) {
                 this.open = false;
@@ -42,7 +43,18 @@ class Pacman {
     }
 
    
-    
+    // powerPill() {
+    //     setInterval(() => {
+
+    //     })
+    // }
+    pillPower() {
+        // turn ghosts blue & reset color every 10 seconds
+        this.power = true;
+        return setTimeout(() => {
+            this.power = false;
+        }, 10000)
+    }
 
     arc() {
         let sAngle;
@@ -159,6 +171,10 @@ class Pacman {
             this.map[yAxis][xAxis] = 0;
             this.pillCount -= 1;
             // console.log(this.pillCount);
+        } else if (this.map[yAxis][xAxis] === 5 && this.solidDetect(xAxis * 30, yAxis * 30, nextX, nextY)) {
+            this.map[yAxis][xAxis] = 0;
+            this.pillCount -= 1;
+            this.pillPower();
         } else {
             return false;
         }
