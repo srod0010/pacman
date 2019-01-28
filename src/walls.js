@@ -57,8 +57,15 @@ class Walls {
         if (gridPoint === 3) {
           this.ctx.beginPath();
           this.ctx.fillStyle = 'orange';
-          this.ctx.arc((j * 30) + 15, (i * 30) + 15, 4, 0, 360);
+          this.ctx.arc((j * 30) + 15, (i * 30) + 15, 5, 0, 2 * Math.PI);
           this.ctx.fill();
+        }
+
+        if (gridPoint === 5) {
+           this.ctx.beginPath();
+           this.ctx.fillStyle = 'red';
+           this.ctx.arc((j * 30) + 15, (i * 30) + 15, 5, 0, 2 * Math.PI);
+           this.ctx.fill();
         }
 
       });
