@@ -10,6 +10,7 @@ class Ghost {
         this.resetColor = this.color;
         this.direction = "none";
         this.prevDirection = "none";
+        this.speed = 1;
     }
 
     reset() {
@@ -56,25 +57,25 @@ class Ghost {
             newY = this.y;
 
         if (direction === "up") {
-            newY -= 14;
+            newY -= 15;
             const top = this.collision(xRow, yRow - 1, newX, newY);
             const left = this.collision(xRow - 1, yRow - 1, newX - 10, newY);
             const right = this.collision(xRow + 1, yRow - 1, newX + 10, newY);
             return top || left || right;
         } else if (direction === "down") {
-            newY += 14;
+            newY += 15;
             const down = this.collision(xRow, yRow + 1, newX, newY);
             const left = this.collision(xRow - 1, yRow + 1, newX - 10, newY);
             const right = this.collision(xRow + 1, yRow + 1, newX + 10, newY);
             return down || left || right;
         } else if (direction === "left") {
-            newX -= 14;
+            newX -= 15;
             const left = this.collision(xRow - 1, yRow, newX, newY);
             const top = this.collision(xRow - 1, yRow - 1, newX, newY - 10);
             const down = this.collision(xRow - 1, yRow + 1, newX, newY + 10);
             return left || top || down;
         } else if (direction === "right") {
-            newX += 14;
+            newX += 15;
             const right = this.collision(xRow + 1, yRow, newX, newY);
             const top = this.collision(xRow + 1, yRow - 1, newX, newY - 10);
             const down = this.collision(xRow + 1, yRow + 1, newX, newY + 10);
@@ -106,16 +107,16 @@ class Ghost {
             this.randomDirection();
         } else if (this.direction === "up") {
             // this.prevDirection = "down";
-            this.y -= .8;
+            this.y -= this.speed;
         } else if (this.direction === "down") {
             // this.prevDirection = "up";
-            this.y += .8;
+            this.y += this.speed;
         } else if (this.direction === "right") {
             // this.prevDirection = "left";
-            this.x += .8;
+            this.x += this.speed;
         } else if (this.direction === "left") {
             // this.prevDirection = "right";
-            this.x -= .8;
+            this.x -= this.speed;
         }
     }
 }

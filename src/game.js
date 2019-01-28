@@ -84,8 +84,10 @@ class Game {
                 this.ghosts.forEach(ghost => {
                     if (this.pacman.power) {
                         ghost.color = 'blue';
+                        ghost.speed = .75;
                     } else {
                         ghost.reset();
+                        ghost.speed = 1;
                     }
                     ghost.draw()
                 });
