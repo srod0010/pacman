@@ -53,7 +53,7 @@ class Pacman {
         this.power = true;
         return setTimeout(() => {
             return this.power = false;
-        }, 7000);
+        }, 10000);
         
     }
 
