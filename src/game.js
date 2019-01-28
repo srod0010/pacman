@@ -26,10 +26,10 @@ class Game {
     }
 
     createGhosts() {
-        this.ghosts[0] = new Ghost(this.ctx, this.map, 285, 300, 'purple');
+        this.ghosts[0] = new Ghost(this.ctx, this.map, 285, 300, 'red');
         this.ghosts[1] = new Ghost(this.ctx, this.map, 285, 290, 'pink');
-        this.ghosts[2] = new Ghost(this.ctx, this.map, 280, 310, 'cyan');
-        this.ghosts[3] = new Ghost(this.ctx, this.map, 284, 320, 'orange');
+        this.ghosts[2] = new Ghost(this.ctx, this.map, 280, 310, 'yellow');
+        this.ghosts[3] = new Ghost(this.ctx, this.map, 284, 320, 'lightblue');
     }
 
     captured() {
