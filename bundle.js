@@ -130,10 +130,19 @@ class Game {
     captured() {
         let caught = false;
          this.ghosts.forEach((ghost) => {
-             if (this.pacman.x <= ghost.x + 20 &&
-                 this.pacman.x >= ghost.x - 20 && this.pacman.y <= ghost.y + 20 &&
-                 this.pacman.y >= ghost.y - 20) {
-                 caught = true;
+             if (ghost.color !== 'blue') {
+                 if (this.pacman.x <= ghost.x + 20 &&
+                     this.pacman.x >= ghost.x - 20 && this.pacman.y <= ghost.y + 20 &&
+                     this.pacman.y >= ghost.y - 20) {
+                     caught = true;
+                 }
+             } else {
+                 if (this.pacman.x <= ghost.x + 20 &&
+                     this.pacman.x >= ghost.x - 20 && this.pacman.y <= ghost.y + 20 &&
+                     this.pacman.y >= ghost.y - 20) {
+                     ghost.x = 285;
+                     ghost.y = 300;
+                 }
              }
          });
          return caught;
@@ -167,7 +176,15 @@ class Game {
                 //  this.speedyGhost.draw();
                 //  this.pokeyGhost.draw();
                 //  this.bashfulGhost.draw();
-                this.ghosts.forEach(ghost => ghost.draw());
+                this.ghosts.forEach(ghost => {
+                    if (this.pacman.power) {
+                        ghost.color = 'blue';
+                    } else {
+                        ghost.reset();
+                    }
+                    ghost.draw()
+                });
+
              }
         }
       
@@ -204,8 +221,13 @@ class Ghost {
         this.x = x;
         this.y = y;
         this.color = color;
+        this.resetColor = this.color;
         this.direction = "none";
         this.prevDirection = "none";
+    }
+
+    reset() {
+        this.color = this.resetColor;
     }
 
     arc() {
@@ -342,9 +364,9 @@ const map = [
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
     [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1],
-    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 5, 3, 3, 3, 3, 3, 1],
     [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
-    [1, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 1],
+    [1, 3, 3, 1, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 1, 3, 3, 1],
     [1, 1, 3, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 3, 1, 1],
     [1, 3, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 3, 1],
     [1, 3, 1, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 1, 3, 1],
@@ -465,6 +487,7 @@ class Pacman {
         this.map = map;
         this.pillCount = 147;
         this.open = false;
+        this.power = false;
         setInterval(() => {
             if (this.open) {
                 this.open = false;
@@ -500,7 +523,19 @@ class Pacman {
     }
 
    
-    
+    // powerPill() {
+    //     setInterval(() => {
+
+    //     })
+    // }
+    pillPower() {
+        // turn ghosts blue & reset color every 10 seconds
+        this.power = true;
+        return setTimeout(() => {
+            return this.power = false;
+        }, 7000);
+        
+    }
 
     arc() {
         let sAngle;
@@ -617,6 +652,10 @@ class Pacman {
             this.map[yAxis][xAxis] = 0;
             this.pillCount -= 1;
             // console.log(this.pillCount);
+        } else if (this.map[yAxis][xAxis] === 5 && this.solidDetect(xAxis * 30, yAxis * 30, nextX, nextY)) {
+            this.map[yAxis][xAxis] = 0;
+            this.pillCount -= 1;
+            this.pillPower();
         } else {
             return false;
         }
@@ -631,6 +670,7 @@ class Pacman {
     }
 
     draw() {
+        console.log(this.power);
         this.escapeSide();
         this.move();
         this.ctx.beginPath();
@@ -734,8 +774,15 @@ class Walls {
         if (gridPoint === 3) {
           this.ctx.beginPath();
           this.ctx.fillStyle = 'orange';
-          this.ctx.arc((j * 30) + 15, (i * 30) + 15, 4, 0, 360);
+          this.ctx.arc((j * 30) + 15, (i * 30) + 15, 5, 0, 2 * Math.PI);
           this.ctx.fill();
+        }
+
+        if (gridPoint === 5) {
+           this.ctx.beginPath();
+           this.ctx.fillStyle = 'red';
+           this.ctx.arc((j * 30) + 15, (i * 30) + 15, 5, 0, 2 * Math.PI);
+           this.ctx.fill();
         }
 
       });

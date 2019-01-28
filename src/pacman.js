@@ -52,8 +52,9 @@ class Pacman {
         // turn ghosts blue & reset color every 10 seconds
         this.power = true;
         return setTimeout(() => {
-            this.power = false;
-        }, 10000)
+            return this.power = false;
+        }, 7000);
+        
     }
 
     arc() {
@@ -189,6 +190,7 @@ class Pacman {
     }
 
     draw() {
+        console.log(this.power);
         this.escapeSide();
         this.move();
         this.ctx.beginPath();

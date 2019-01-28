@@ -7,8 +7,13 @@ class Ghost {
         this.x = x;
         this.y = y;
         this.color = color;
+        this.resetColor = this.color;
         this.direction = "none";
         this.prevDirection = "none";
+    }
+
+    reset() {
+        this.color = this.resetColor;
     }
 
     arc() {
