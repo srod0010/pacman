@@ -121,10 +121,10 @@ class Game {
     }
 
     createGhosts() {
-        this.ghosts[0] = new Ghost(this.ctx, this.map, 285, 300, 'purple');
+        this.ghosts[0] = new Ghost(this.ctx, this.map, 285, 300, 'red');
         this.ghosts[1] = new Ghost(this.ctx, this.map, 285, 290, 'pink');
-        this.ghosts[2] = new Ghost(this.ctx, this.map, 280, 310, 'cyan');
-        this.ghosts[3] = new Ghost(this.ctx, this.map, 284, 320, 'orange');
+        this.ghosts[2] = new Ghost(this.ctx, this.map, 280, 310, 'yellow');
+        this.ghosts[3] = new Ghost(this.ctx, this.map, 284, 320, 'lightblue');
     }
 
     captured() {
@@ -235,16 +235,20 @@ class Ghost {
 
     arc() {
        this.ctx.arc(this.x, this.y, 12.5, 0, 2 * Math.PI);
-       this.ctx.fillStyle = this.color;
-       this.ctx.fill();
-       this.ctx.stroke();
+    //    this.ctx.fillStyle = this.color;
+    //    this.ctx.fill();
+    //    this.ctx.stroke();
     }
 
     draw() {
         this.changeSides();
         this.move();
-        this.ctx.beginPath();
-        this.arc();
+
+        const ghostImg = new Image();
+        ghostImg.src = `./images/${this.color}.png`;
+        this.ctx.drawImage(ghostImg, 0, 0, 512, 512, this.x- 15, this.y- 15, 30, 30);
+        // this.ctx.beginPath();
+        // this.arc();
     }
 
     randomDirection() {
@@ -273,25 +277,25 @@ class Ghost {
             newY = this.y;
 
         if (direction === "up") {
-            newY -= 15;
+            newY -= 13;
             const top = this.collision(xRow, yRow - 1, newX, newY);
             const left = this.collision(xRow - 1, yRow - 1, newX - 10, newY);
             const right = this.collision(xRow + 1, yRow - 1, newX + 10, newY);
             return top || left || right;
         } else if (direction === "down") {
-            newY += 15;
+            newY += 13;
             const down = this.collision(xRow, yRow + 1, newX, newY);
             const left = this.collision(xRow - 1, yRow + 1, newX - 10, newY);
             const right = this.collision(xRow + 1, yRow + 1, newX + 10, newY);
             return down || left || right;
         } else if (direction === "left") {
-            newX -= 15;
+            newX -= 13;
             const left = this.collision(xRow - 1, yRow, newX, newY);
             const top = this.collision(xRow - 1, yRow - 1, newX, newY - 10);
             const down = this.collision(xRow - 1, yRow + 1, newX, newY + 10);
             return left || top || down;
         } else if (direction === "right") {
-            newX += 15;
+            newX += 13;
             const right = this.collision(xRow + 1, yRow, newX, newY);
             const top = this.collision(xRow + 1, yRow - 1, newX, newY - 10);
             const down = this.collision(xRow + 1, yRow + 1, newX, newY + 10);
@@ -356,7 +360,7 @@ const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
     [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
-    [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
+    [1, 5, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 5, 1],
     [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
     [1, 3, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 3, 1],
     [1, 3, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 3, 1],
@@ -367,9 +371,9 @@ const map = [
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
     [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1],
-    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 5, 3, 3, 3, 3, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
     [1, 3, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1],
-    [1, 3, 3, 1, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 1, 3, 3, 1],
+    [1, 5, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 5, 1],
     [1, 1, 3, 1, 3, 1, 3, 1, 1, 1, 1, 1, 3, 1, 3, 1, 3, 1, 1],
     [1, 3, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 3, 1],
     [1, 3, 1, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 1, 3, 1],
@@ -777,13 +781,13 @@ class Walls {
         if (gridPoint === 3) {
           this.ctx.beginPath();
           this.ctx.fillStyle = 'orange';
-          this.ctx.arc((j * 30) + 15, (i * 30) + 15, 5, 0, 2 * Math.PI);
+          this.ctx.arc((j * 30) + 15, (i * 30) + 15, 2.5, 0, 2 * Math.PI);
           this.ctx.fill();
         }
 
         if (gridPoint === 5) {
            this.ctx.beginPath();
-           this.ctx.fillStyle = 'red';
+           this.ctx.fillStyle = 'orange';
            this.ctx.arc((j * 30) + 15, (i * 30) + 15, 5, 0, 2 * Math.PI);
            this.ctx.fill();
         }
