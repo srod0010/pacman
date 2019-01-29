@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.onkeydown = function (e) {
         //ascii values => a = 65
         if (e.which == 37) {
+            e.preventDefault();
             //left
             if (!game.pacman.checkCollision('left')) {
                 game.pacman.direction = 'left';
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log('left');
             console.log(game.pacman.x);
         } else if (e.which == 38) {
+            e.preventDefault();
             //up
             if (!game.pacman.checkCollision('up')) {
                 game.pacman.direction = 'up';
@@ -87,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             console.log('up');
         } else if (e.which == 39) {
+            e.preventDefault();
             // right
             if(!game.pacman.checkCollision('right')) {
                 game.pacman.direction = 'right';
@@ -96,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log('right');
 
         } else if (e.which == 40) {
+            e.preventDefault();
             // down
             if(!game.pacman.checkCollision('down')) {
                 game.pacman.direction = 'down';
