@@ -28,6 +28,7 @@
     /* width: 50%;
     height: 80%; */
     /* border: 1px solid yellow; */
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -70,6 +71,54 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.instructions {
+    width: 70%;
+    height: 80%;
+    left: 200px;
+    border: 1px solid white;
+    position: absolute;
+    left: -80%;
+    bottom: 10%;
+    font-size: 20px;
+    background-color: rgb(124, 1, 1);
+    color: rgb(207, 207, 207);
+    border: 10px solid rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.instructions-writing {
+    text-align: center;
+    color: black;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 150px; */
+}
+
+.instructions-writing h3 {
+    color: white;
+    text-align: left;
+}
+
+.instructions-writing h3:last-child {
+    color: white;
+    text-align: center;
+}
+
+.instructions-arrows {
+     /* background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Arrow_keys.svg/1280px-Arrow_keys.svg.png); */
+     /* background-image: url(https://geekhack.org/index.php?action=dlattach;topic=35143.0;attach=3050;image); */
+     background-image: url(https://images.vexels.com/media/users/3/153198/isolated/preview/c19d67f7ca060b53e6040a10b5edd2b5-keyboard-arrow-keys-icon-by-vexels.png);
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     width: 100%;
+     height: 60%;
 }
 
 #gameover {
