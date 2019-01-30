@@ -153,7 +153,7 @@ class Pacman {
     solidDetect(dx, dy, x, y) {
         if (x >= dx && x <= dx + 30 && y >= dy && y <= dy + 30) {
             // console.log(true);
-            console.log(this.pillCount);
+            // console.log(this.pillCount);
             return true;
         } else {
             // console.log(false);
@@ -190,7 +190,7 @@ class Pacman {
     }
 
     draw() {
-        console.log(this.power);
+        // console.log(this.power);
         this.escapeSide();
         this.move();
         this.ctx.beginPath();

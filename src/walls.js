@@ -72,13 +72,13 @@ class Walls {
     });
   }
 
-  endGame() {
-    this.createWalls();
-    this.ctx.fillStyle = 'white';
-    this.ctx.font = "39px Georgia";
-    this.ctx.fillText("Congratulations you won!", 80, 330); //text, pos
-    // this.ctx.strokeText("Pacman loading....", 50, 100); //hollow text
-  }
+  // endGame() {
+  //   this.createWalls();
+  //   this.ctx.fillStyle = 'white';
+  //   this.ctx.font = "39px Georgia";
+  //   this.ctx.fillText("Congratulations you won!", 80, 330); //text, pos
+  //   // this.ctx.strokeText("Pacman loading....", 50, 100); //hollow text
+  // }
 
   render() {
       this.clearWalls();

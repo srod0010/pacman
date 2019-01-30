@@ -151,11 +151,11 @@ class Game {
     gameOver() {
         if (this.pacman.pillCount === 0 || this.captured()) {
             // console.log('ate all the pills');
-            console.log('hellowalsfk')
+            // console.log('hellowalsfk')
             this.winner = true;
             return true;
         } else {
-            console.log(`${this.pacman.pillCount} pills remaining`)
+            // console.log(`${this.pacman.pillCount} pills remaining`)
         }
     }
 
@@ -168,32 +168,49 @@ class Game {
             pregame.style.display = 'none';
              if (this.gameOver()) {
                  endGame.style.display = 'block';
-             } else {
-                 console.log(this.started);
-                 this.walls.render();
-                 this.pacman.draw();
-                //  this.shadowGhost.draw();
-                //  this.speedyGhost.draw();
-                //  this.pokeyGhost.draw();
-                //  this.bashfulGhost.draw();
-                this.ghosts.forEach(ghost => {
-                    if (this.pacman.power) {
-                        ghost.color = 'blue';
-                        ghost.speed = .75;
-                    } else {
-                        ghost.reset();
-                        ghost.speed = 1;
-                    }
-                    ghost.draw()
-                });
+             } 
+            //  else {
+            //     //  console.log(this.started);
+            //      this.walls.render();
+            //      this.pacman.draw();
+            //     //  this.shadowGhost.draw();
+            //     //  this.speedyGhost.draw();
+            //     //  this.pokeyGhost.draw();
+            //     //  this.bashfulGhost.draw();
+            //     this.ghosts.forEach(ghost => {
+            //         if (this.pacman.power) {
+            //             ghost.color = 'blue';
+            //             ghost.speed = .75;
+            //         } else {
+            //             ghost.reset();
+            //             ghost.speed = 1;
+            //         }
+            //         ghost.draw()
+            //     });
 
-             }
+            //  }
         }
       
     }
 
     play() {
        const animate = () => {
+           this.walls.render();
+           this.pacman.draw();
+           //  this.shadowGhost.draw();
+           //  this.speedyGhost.draw();
+           //  this.pokeyGhost.draw();
+           //  this.bashfulGhost.draw();
+           this.ghosts.forEach(ghost => {
+               if (this.pacman.power) {
+                   ghost.color = 'blue';
+                   ghost.speed = .75;
+               } else {
+                   ghost.reset();
+                   ghost.speed = 1;
+               }
+               ghost.draw()
+           });
            this.frame = requestAnimationFrame(animate);
            this.display();
            
@@ -431,8 +448,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.direction = 'left';
                 game.pacman.xdir -= 30;
             } 
-            console.log('left');
-            console.log(game.pacman.x);
+            // console.log('left');
+            // console.log(game.pacman.x);
         } else if (e.which == 38) {
             e.preventDefault();
             //up
@@ -441,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.ydir -= 30;
 
             }
-            console.log('up');
+            // console.log('up');
         } else if (e.which == 39) {
             e.preventDefault();
             // right
@@ -450,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.xdir += 30;
 
             }
-            console.log('right');
+            // console.log('right');
 
         } else if (e.which == 40) {
             e.preventDefault();
@@ -459,13 +476,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.direction = 'down';
                 game.pacman.ydir += 30;
             }
-            console.log('down');
+            // console.log('down');
         }
     }
     game.display();
-    document.getElementById("start").addEventListener("click", () =>{
-      game.started = true;  
-      game.play()
+    
+    document.getElementById("start").addEventListener("click", () => { 
+      if (game.started === false) {
+          game.started = true;
+          game.play();
+      } else {
+          document.location.reload();
+          console.log(game.started);
+      }
     });
     
     
@@ -644,7 +667,7 @@ class Pacman {
     solidDetect(dx, dy, x, y) {
         if (x >= dx && x <= dx + 30 && y >= dy && y <= dy + 30) {
             // console.log(true);
-            console.log(this.pillCount);
+            // console.log(this.pillCount);
             return true;
         } else {
             // console.log(false);
@@ -681,7 +704,7 @@ class Pacman {
     }
 
     draw() {
-        console.log(this.power);
+        // console.log(this.power);
         this.escapeSide();
         this.move();
         this.ctx.beginPath();
@@ -800,13 +823,13 @@ class Walls {
     });
   }
 
-  endGame() {
-    this.createWalls();
-    this.ctx.fillStyle = 'white';
-    this.ctx.font = "39px Georgia";
-    this.ctx.fillText("Congratulations you won!", 80, 330); //text, pos
-    // this.ctx.strokeText("Pacman loading....", 50, 100); //hollow text
-  }
+  // endGame() {
+  //   this.createWalls();
+  //   this.ctx.fillStyle = 'white';
+  //   this.ctx.font = "39px Georgia";
+  //   this.ctx.fillText("Congratulations you won!", 80, 330); //text, pos
+  //   // this.ctx.strokeText("Pacman loading....", 50, 100); //hollow text
+  // }
 
   render() {
       this.clearWalls();
