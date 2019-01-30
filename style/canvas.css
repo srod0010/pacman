@@ -53,6 +53,7 @@
 
 
 
+
  
  #canvas {
      border: 1px solid black;
@@ -136,7 +137,8 @@
     /* background-color: red; */
     /* opacity: 0.1; */
     /* background-image: url('https://cdn.dribbble.com/users/368620/screenshots/2097058/pacman.gif'); */
-    background-image: url('https://art-u3.infcdn.net/articles_uploads/2/2044/pac-man-game-over.jpg');
+    /* background-image: url('https://art-u3.infcdn.net/articles_uploads/2/2044/pac-man-game-over.jpg'); */
+    background-image: url(https://i.pinimg.com/originals/ac/65/be/ac65be76b51583e217304de0cb24c034.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

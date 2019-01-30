@@ -77,8 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.direction = 'left';
                 game.pacman.xdir -= 30;
             } 
-            console.log('left');
-            console.log(game.pacman.x);
+            // console.log('left');
+            // console.log(game.pacman.x);
         } else if (e.which == 38) {
             e.preventDefault();
             //up
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.ydir -= 30;
 
             }
-            console.log('up');
+            // console.log('up');
         } else if (e.which == 39) {
             e.preventDefault();
             // right
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.xdir += 30;
 
             }
-            console.log('right');
+            // console.log('right');
 
         } else if (e.which == 40) {
             e.preventDefault();
@@ -105,13 +105,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 game.pacman.direction = 'down';
                 game.pacman.ydir += 30;
             }
-            console.log('down');
+            // console.log('down');
         }
     }
     game.display();
-    document.getElementById("start").addEventListener("click", () =>{
-      game.started = true;  
-      game.play()
+    
+    document.getElementById("start").addEventListener("click", () => { 
+      if (game.started === false) {
+          game.started = true;
+          game.play();
+      } else {
+          document.location.reload();
+          console.log(game.started);
+      }
     });
     
     

@@ -56,11 +56,11 @@ class Game {
     gameOver() {
         if (this.pacman.pillCount === 0 || this.captured()) {
             // console.log('ate all the pills');
-            console.log('hellowalsfk')
+            // console.log('hellowalsfk')
             this.winner = true;
             return true;
         } else {
-            console.log(`${this.pacman.pillCount} pills remaining`)
+            // console.log(`${this.pacman.pillCount} pills remaining`)
         }
     }
 
@@ -73,32 +73,49 @@ class Game {
             pregame.style.display = 'none';
              if (this.gameOver()) {
                  endGame.style.display = 'block';
-             } else {
-                 console.log(this.started);
-                 this.walls.render();
-                 this.pacman.draw();
-                //  this.shadowGhost.draw();
-                //  this.speedyGhost.draw();
-                //  this.pokeyGhost.draw();
-                //  this.bashfulGhost.draw();
-                this.ghosts.forEach(ghost => {
-                    if (this.pacman.power) {
-                        ghost.color = 'blue';
-                        ghost.speed = .75;
-                    } else {
-                        ghost.reset();
-                        ghost.speed = 1;
-                    }
-                    ghost.draw()
-                });
+             } 
+            //  else {
+            //     //  console.log(this.started);
+            //      this.walls.render();
+            //      this.pacman.draw();
+            //     //  this.shadowGhost.draw();
+            //     //  this.speedyGhost.draw();
+            //     //  this.pokeyGhost.draw();
+            //     //  this.bashfulGhost.draw();
+            //     this.ghosts.forEach(ghost => {
+            //         if (this.pacman.power) {
+            //             ghost.color = 'blue';
+            //             ghost.speed = .75;
+            //         } else {
+            //             ghost.reset();
+            //             ghost.speed = 1;
+            //         }
+            //         ghost.draw()
+            //     });
 
-             }
+            //  }
         }
       
     }
 
     play() {
        const animate = () => {
+           this.walls.render();
+           this.pacman.draw();
+           //  this.shadowGhost.draw();
+           //  this.speedyGhost.draw();
+           //  this.pokeyGhost.draw();
+           //  this.bashfulGhost.draw();
+           this.ghosts.forEach(ghost => {
+               if (this.pacman.power) {
+                   ghost.color = 'blue';
+                   ghost.speed = .75;
+               } else {
+                   ghost.reset();
+                   ghost.speed = 1;
+               }
+               ghost.draw()
+           });
            this.frame = requestAnimationFrame(animate);
            this.display();
            
