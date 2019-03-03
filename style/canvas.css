@@ -2,124 +2,139 @@
      margin: 0;
  }
  .wrapper {
-     width: 100%;
+     width: 100vw;
      /* height: 1000px; */
-     height: 100%;
+     height: 100vh;
      /* background-image: url('https://images.unsplash.com/photo-1530482817083-29ae4b92ff15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3302&q=80'); */
      background-image: url('https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2848&q=80');
      background-position: center;
+     background-size: cover;
      /* border: 1px solid red; */
      display: flex;
      flex-direction: column;
  }
 
+ .main-content {
+     width: calc(100vw - 100px);
+     height: calc(100vh - 100px);
+     /* border: 1px solid orange; */
+     margin: auto auto;
+     display: flex;
+ }
+
+ .flex-column {
+     width: 50%;
+     height: 100%;
+     /* border: 1px solid green; */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     /* justify-content: space-around; */
+ }
+
 .title{
-    width: 800px;
-    height: 180px;
+    width: 100%;
+    height: 20%;
     /* border: 1px solid yellow; */
     margin: 0px auto 0px auto;
-    /* background-image: url('https://www.logolynx.com/images/logolynx/96/967ea5e4598462a301b53eb8b10ecfad.png'); */
     background-image: url('https://www.logolynx.com/images/logolynx/81/812485da0e4d9405b6e113bf6db8a235.png');
     background-position: center;
     background-size: cover;
+    margin-bottom: 20px;
 }
 
-.main {
-    /* width: 50%;
-    height: 80%; */
-    /* border: 1px solid yellow; */
-    /* height: 100%; */
+.gameplay {
+    height: 63%;
+    width: 70%;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    position: relative;
-    /* position: sticky; */
+    background-color: rgb(9, 28, 63);
 
+    color: rgb(207, 207, 207);
+    border: 7px solid rgb(2%, 6%, 13%);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-around;
+    
 }
 
 #start {
     border-radius: 10px;
-    border: 5px solid black;
+    border: 5px solid rgb(2%, 6%, 13%);
     color: white;
-    height: 60px;
-    width: 100%;
+    height: 8%;
+    width: 70%;
     margin: 10px 0;
     font-family: cursive;
     font-size: 30px;
     font-weight: 900;
-    background-color: rgb(124, 1, 1);
-    /* background-color: red; */
+    background-color: rgb(9, 28, 63);
+}
+
+.flex-reg {
+    width: 50%;
+    height: 100%;
+    /* border: 1px solid pink; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
-
-
- 
  #canvas {
      border: 1px solid black;
      background-color: black;
+     /* width: 75%;
+     height: 75%; */
+     width: 75%;
+     height: 80%;
  }
 
 
 #pregame {
-    width: 575px;
-    height: 665px;
-    /* border: 1px solid green; */
+    width: 45%;
+    height: 80%;
     position: absolute;
     display: none;
-    /* background-color: red; */
-    /* opacity: 0.1; */
     background-image: url('https://cdn.dribbble.com/users/368620/screenshots/2097058/pacman.gif');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.instructions {
-    width: 70%;
-    height: 75%;
-    left: 200px;
-    border: 1px solid white;
-    position: absolute;
-    left: -80%;
-    bottom: 10%;
-    font-size: 20px;
-    background-color: rgb(124, 1, 1);
-    color: rgb(207, 207, 207);
-    border: 10px solid rgb(0, 0, 0);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
 
 .instructions-writing {
     text-align: center;
     color: black;
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    height: 150px; */
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid white; */
+    width: 100%;
 }
 
 .instructions-writing h1 {
     text-decoration: underline;
     text-decoration-color: rgb(80, 0, 0);
+    font-size: 400%;
+    color: white;
 }
 
-.instructions-writing h3 {
+.instructions-writing h2 {
     color: white;
     text-align: left;
+    font-size: 250%;
 }
 
-.instructions-writing h3:last-child {
+.instructions-writing h2:last-child {
     color: white;
     text-align: center;
 }
 
+
+
 .instructions-arrows {
-     /* background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Arrow_keys.svg/1280px-Arrow_keys.svg.png); */
-     /* background-image: url(https://geekhack.org/index.php?action=dlattach;topic=35143.0;attach=3050;image); */
      background-image: url(https://images.vexels.com/media/users/3/153198/isolated/preview/c19d67f7ca060b53e6040a10b5edd2b5-keyboard-arrow-keys-icon-by-vexels.png);
      background-position: center;
      background-repeat: no-repeat;
@@ -129,15 +144,9 @@
 }
 
 #gameover {
-    width: 575px;
-    height: 665px;
-    /* border: 1px solid green; */
-    position: absolute;
+    width: 100%;
+    height: 100%;
     display: none;
-    /* background-color: red; */
-    /* opacity: 0.1; */
-    /* background-image: url('https://cdn.dribbble.com/users/368620/screenshots/2097058/pacman.gif'); */
-    /* background-image: url('https://art-u3.infcdn.net/articles_uploads/2/2044/pac-man-game-over.jpg'); */
     background-image: url(https://i.pinimg.com/originals/ac/65/be/ac65be76b51583e217304de0cb24c034.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -149,5 +158,43 @@
 .end-text {
     text-align: center;
     color: white;
+    font-family: fantasy;
+}
+
+
+
+.links {
+    display: flex;
+    color: white;
+    color: darkgrey;
+    text-decoration: none;
+    font-family: fantasy;
+    width: 60%;
+    height: 10%;
+    /* border: 1px solid red; */
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.github {
+   text-align: center;
+   font-size: 27px;
+   color: white;
+   color: darkgrey;
+   text-decoration: none;
+   font-family: fantasy;
+   
+}
+
+
+
+.linkedin {
+    text-align: center;
+    font-size: 27px;
+    color: white;
+    color: darkgrey;
+    text-decoration: none;
     font-family: fantasy;
 }
