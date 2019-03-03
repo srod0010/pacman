@@ -162,12 +162,14 @@ class Game {
     display() {
         let pregame = document.getElementById('pregame');
         let endGame = document.getElementById('gameover');
+        let gameBoard = document.getElementById('canvas')
         if (this.started === false) {
             pregame.style.display = 'block';
         } else {
             pregame.style.display = 'none';
              if (this.gameOver()) {
                  endGame.style.display = 'block';
+                 gameBoard.style.display = 'none';
              } 
             //  else {
             //     //  console.log(this.started);
