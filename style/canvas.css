@@ -66,7 +66,7 @@
     width: 70%;
     margin: 10px 0;
     font-family: cursive;
-    font-size: 30px;
+    font-size: 2vw;
     font-weight: 900;
     background-color: rgb(9, 28, 63);
 }
@@ -117,14 +117,14 @@
 .instructions-writing h1 {
     text-decoration: underline;
     text-decoration-color: rgb(80, 0, 0);
-    font-size: 400%;
+    font-size: 3vw;
     color: white;
 }
 
 .instructions-writing h2 {
     color: white;
     text-align: left;
-    font-size: 250%;
+    font-size: 1.8vw;
 }
 
 .instructions-writing h2:last-child {
@@ -159,6 +159,7 @@
     text-align: center;
     color: white;
     font-family: fantasy;
+    font-size: 2vw;
 }
 
 
@@ -180,7 +181,7 @@
 
 .github {
    text-align: center;
-   font-size: 27px;
+   font-size: 1.5vw;
    color: white;
    color: darkgrey;
    text-decoration: none;
@@ -192,7 +193,7 @@
 
 .linkedin {
     text-align: center;
-    font-size: 27px;
+    font-size: 1.5vw;
     color: white;
     color: darkgrey;
     text-decoration: none;
