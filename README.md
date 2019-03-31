@@ -5,6 +5,7 @@
 - ### [Design](#design)
 - ### [Technologies](#technologies)
 - ### [Gameplay](#gameplay)
+- ### [Live](http://www.saviorodrigues.com/pacman/)
 ###  Background and Overview
 PACMAN is a game in where the goal is to accumulate the maximum number of points by moving through a maze collecting coins and eating ghosts. The game goes until all the coins in the maze have been collected, or the user runs into a ghost while the pacman in not in a powered up state.
 ### Functionality
